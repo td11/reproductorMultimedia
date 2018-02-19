@@ -1,5 +1,5 @@
 ﻿* {
-    margin: 0;
+    margin: 0 0 0 0;
     padding: 0;
     box-sizing: border-box;
 }
@@ -50,6 +50,10 @@ body {
 #controles,
 #listaReproduccion {
     padding: 10px;
+}
+
+#botones{
+    margin-top: 0.5em;
 }
 
 #cuerpo {
@@ -142,3 +146,179 @@ audio {
     align-self: center;
     flex-grow: 1;
 }
+
+/* Barras de progreso */
+
+#barraTiempo {
+  -webkit-appearance: none;
+  width: 80%;
+  margin: 8.85px 0;
+}
+#barraTiempo:focus {
+  outline: none;
+}
+#barraTiempo::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 4.3px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #000000;
+  border-radius: 5px;
+  border: 1.5px solid #010101;
+}
+#barraTiempo::-webkit-slider-thumb {
+  box-shadow: 2.2px 2.2px 15px #00ff00, 0px 0px 2.2px #1aff1a;
+  border: 3.2px solid #000000;
+  height: 22px;
+  width: 13px;
+  border-radius: 6px;
+  background: #0a6684;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -10.35px;
+}
+#barraTiempo:focus::-webkit-slider-runnable-track {
+  background: #121212;
+}
+#barraTiempo::-moz-range-track {
+  width: 100%;
+  height: 4.3px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #000000;
+  border-radius: 5px;
+  border: 1.5px solid #010101;
+}
+#barraTiempo::-moz-range-thumb {
+  box-shadow: 2.2px 2.2px 15px #00ff00, 0px 0px 2.2px #1aff1a;
+  border: 3.2px solid #000000;
+  height: 22px;
+  width: 13px;
+  border-radius: 6px;
+  background: #0a6684;
+  cursor: pointer;
+}
+#barraTiempo::-ms-track {
+  width: 100%;
+  height: 4.3px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+#barraTiempo::-ms-fill-lower {
+  background: #000000;
+  border: 1.5px solid #010101;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+#barraTiempo::-ms-fill-upper {
+  background: #000000;
+  border: 1.5px solid #010101;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+#barraTiempo::-ms-thumb {
+  box-shadow: 2.2px 2.2px 15px #00ff00, 0px 0px 2.2px #1aff1a;
+  border: 3.2px solid #000000;
+  height: 22px;
+  width: 13px;
+  border-radius: 6px;
+  background: #0a6684;
+  cursor: pointer;
+  height: 4.3px;
+}
+#barraTiempo:focus::-ms-fill-lower {
+  background: #000000;
+}
+#barraTiempo:focus::-ms-fill-upper {
+  background: #121212;
+}
+
+/* Volumen */
+
+#volumen {
+  -webkit-appearance: none;
+  margin: 8.4px 0;
+}
+#volumen:focus {
+  outline: none;
+}
+#volumen::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 1.2px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #000000;
+  border-radius: 5px;
+  border: 1.5px solid #010101;
+}
+#volumen::-webkit-slider-thumb {
+  box-shadow: 2.2px 2.2px 15px #00ff00, 0px 0px 2.2px #1aff1a;
+  border: 0.9px solid #000000;
+  height: 18px;
+  width: 18px;
+  border-radius: 48px;
+  background: #0a6684;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -9.9px;
+}
+#volumen:focus::-webkit-slider-runnable-track {
+  background: #121212;
+}
+#volumen::-moz-range-track {
+  width: 100%;
+  height: 1.2px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #000000;
+  border-radius: 5px;
+  border: 1.5px solid #010101;
+}
+#volumen::-moz-range-thumb {
+  box-shadow: 2.2px 2.2px 15px #00ff00, 0px 0px 2.2px #1aff1a;
+  border: 0.9px solid #000000;
+  height: 18px;
+  width: 18px;
+  border-radius: 48px;
+  background: #0a6684;
+  cursor: pointer;
+}
+#volumen::-ms-track {
+  width: 100%;
+  height: 1.2px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+#volumen::-ms-fill-lower {
+  background: #000000;
+  border: 1.5px solid #010101;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+#volumen::-ms-fill-upper {
+  background: #000000;
+  border: 1.5px solid #010101;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+#volumen::-ms-thumb {
+  box-shadow: 2.2px 2.2px 15px #00ff00, 0px 0px 2.2px #1aff1a;
+  border: 0.9px solid #000000;
+  height: 18px;
+  width: 18px;
+  border-radius: 48px;
+  background: #0a6684;
+  cursor: pointer;
+  height: 1.2px;
+}
+#volumen:focus::-ms-fill-lower {
+  background: #000000;
+}
+#volumen:focus::-ms-fill-upper {
+  background: #121212;
+}
+
