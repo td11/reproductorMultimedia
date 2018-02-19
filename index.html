@@ -26,8 +26,13 @@
                     </div>
                     <div id="botones">
                         <button class="control" id="btnPlay">
-                            <object data="Media/Images/play.svg" type="image/svg+xml">
+                            <object id="objetoPlay" data="Media/Images/play.svg" type="image/svg+xml">
                                <img src="Media/Images/icons8-play-26.png" />
+                            </object>
+                        </button>
+                        <button class="control" id="btnPause">
+                            <object id="objetoPlay" data="Media/Images/pause.svg" type="image/svg+xml">
+                               <img src="Media/Images/iconopause.png" />
                             </object>
                         </button>
                         <button class="control" id="btnAdelantar">
@@ -50,14 +55,14 @@
                 </div>
             </div>
             <div id="listaReproduccion">
-                <button class="accordion">Lista multimedia</button>
-                <div class="panel">
-                    <div id="1" class="archivo" tipo="audio">Papa Roach Born For Greatness</div>
-                    <div id="2" class="archivo" tipo="video">Batman Opening</div>
-                    <div id="3" class="archivo" tipo="audio">Papa Roach Falling Apart</div>
-                    <div id="4" class="archivo" tipo="video">Metal Gear Solid 2</div>
-                    <div id="5" class="archivo" tipo="audio">Papa Roach Last Resort</div>
-                    <div id="6" class="archivo" tipo="video">Deadpool 2 trailer</div>
+                <p class="accordion">Lista multimedia</p>
+                <div class="panel" id="panel">
+                    <div id="1" class="archivo" seleccionada="true" tipo="audio">Papa Roach Born For Greatness</div>
+                    <div id="2" class="archivo" seleccionada="false" tipo="video">Batman Opening</div>
+                    <div id="3" class="archivo" seleccionada="false" tipo="audio">Papa Roach Falling Apart</div>
+                    <div id="4" class="archivo" seleccionada="false" tipo="video">Metal Gear Solid 2</div>
+                    <div id="5" class="archivo" seleccionada="false" tipo="audio">Papa Roach Last Resort</div>
+                    <div id="6" class="archivo" seleccionada="false" tipo="video">Deadpool 2 trailer</div>
                 </div>
             </div>
         </div>

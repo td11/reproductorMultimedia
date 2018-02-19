@@ -1,13 +1,13 @@
 //----------VARIABLES GLOBALES----------
-var seleccion, pistaSeleccionada = 1,
+var seleccion, pistaSeleccionada = 0,
     estiloDeseleccion = document.getElementsByClassName('archivo')[1].style;
 
 var listadoArchivos = ['Media/Audio/Papa Roach - Born For Greatness.mp3', 'Media/Videos/BatmanOpening.mp4', 'Media/Audio/Papa Roach-Falling Apart.mp3', 'Media/Videos/mgs2.mp4', 'Media/Audio/Papa Roach - Last Resort.mp3', 'Media/Videos/trailer_deadpool.mp4'];
 var listaReproduccion = document.getElementsByClassName('archivo');
 var pantallaContenido = document.getElementById('contenido');
-var acc = document.getElementsByClassName("accordion");
-var i, cancionSeleccionada;
-var contenedorSvg, svgPlay, svgPause, svgVolumenUp, svgVolumenDown, svgAdelantar;
+var cancionSeleccionada;
+var contenedorSvg, svgPlay, svgPause, dataSVGPlay, dataSVGPause;
+var comprobarReproduccion = true;
 //--------------------------------------
 
 cargaScript();
@@ -17,46 +17,34 @@ cargaScript();
  */
 function cargaScript() {
 
-    seleccionArchivo();
+    inicializarSVG();
     cargaEventos();
 
-    //Menu acordeon
-    for (i = 0; i < acc.length; i++) {
-        acc[i].addEventListener("click", function () {
-            /* Toggle between adding and removing the "active" class,
-            to highlight the button that controls the panel */
-            this.classList.toggle("active");
-
-            /* Toggle between hiding and showing the active panel */
-            var panel = this.nextElementSibling;
-            if (panel.style.display === "block") {
-                panel.style.display = "none";
-            } else {
-                panel.style.display = "block";
-            }
-        });
-    }
 
 }
 
+
 function inicializarSVG() {
-    //= '<object data="Media/Images/play.svg" type="image/svg+xml"><img src="Media/Images/icons8-play-26.png" /></object>';
     contenedorSvg = document.createElement('object');
     svgPlay = document.createElement('img');
     svgPlay.setAttribute('src', 'Media/Images/icons8-play-26.png');
     svgPause = document.createElement('img');
     svgPause.setAttribute('src', 'Media/Images/iconopause.png');
-    svgAdelantar = document.createElement('img');
-    svgAdelantar.setAttribute('src', 'Media/Images/adelantaricono.png');
-    svgVolumenUp = document.createElement('img');
-    svgVolumenUp.setAttribute('src', 'Media/Images/up_volumen.png');
-    svgVolumenDown = document.createElement('img');
-    svgVolumenDown.setAttribute('src', 'Media/Images/low_volume.png');
 }
 
 /* Alterna la visibilidad del boton svg Play y Pause */
 function svgPlayPause() {
+    var objetoMedia = document.getElementById('objetoPlay');
+    if (comprobarReproduccion == true) {
+        objetoMedia.setAttribute('data', 'Media/Images/play.svg');
+        objetoMedia.removeChild(objetoMedia.childNodes[0]);
+        objetoMedia.appendChild(svgPlay);
+    } else {
+        objetoMedia.setAttribute('data', 'Media/Images/pause.svg');
+        objetoMedia.removeChild(objetoMedia.childNodes[0]);
+        objetoMedia.appendChild(svgPause);
 
+    }
 }
 
 /**
@@ -78,11 +66,10 @@ function cargaEventos() {
                     break;
             }
 
-            document.getElementById('btnPlay').append = 'Play';
 
             seleccionArchivo();
+
             contenido.setAttribute('src', listadoArchivos[i]);
-            contenido.setAttribute('id', 'archivoReproducir');
             cancionSeleccionada = i;
             eliminaItem(pantallaContenido);
             pantallaContenido.appendChild(contenido);
@@ -93,13 +80,12 @@ function cargaEventos() {
     }
 
     document.getElementById('btnPlay').addEventListener('click', function () {
+
         if (seleccion.paused) {
             seleccion.play();
-            this.textContent = 'Pause';
-        } else {
-            seleccion.pause();
-            this.textContent = 'Play';
         }
+
+        comprobarReproduccion = true;
 
         seleccion.ontimeupdate = function () {
 
@@ -108,12 +94,19 @@ function cargaEventos() {
             document.getElementById('barraTiempo').value = seleccion.currentTime;
 
             if (seleccion.ended) {
-                barraDuracion.setAttribute('value', seleccion.currentTime);
-                //reproducirSiguiente();
+                //barraDuracion.setAttribute('value', seleccion.currentTime);
+                reproducirSiguiente();
             }
 
         }
 
+
+    }, false);
+
+    document.getElementById('btnPause').addEventListener('click', function () {
+
+        comprobarReproduccion = false;
+        seleccion.pause();
 
     }, false);
 
@@ -137,12 +130,20 @@ function cargaEventos() {
 
 }
 
+function comprobarNumeroDeCanciones(){
+    if(cancionSeleccionada>5){
+        cancionSeleccionada=0;
+    }else{
+        cancionSeleccionada++;
+    }
+}
 
 function reproducirSiguiente() {
+    comprobarNumeroDeCanciones();
     var contenido = document.getElementById('contenido');
-    var siguienteCancion = document.getElementById('')
+    var siguienteCancion = document.getElementById('panel').children[cancionSeleccionada];
 
-    switch (this.getAttribute('tipo')) {
+    switch (siguienteCancion.getAttribute('tipo')) {
         case 'video':
             contenido = document.createElement('video');
             break;
@@ -151,17 +152,28 @@ function reproducirSiguiente() {
             break;
     }
 
-    document.getElementById('btnPlay').textContent = 'Play';
-
     seleccionArchivo();
-    contenido.setAttribute('src', listadoArchivos[i]);
-    contenido.setAttribute('id', 'archivoReproducir');
-    cancionSeleccionada = i;
+    contenido.setAttribute('src', listadoArchivos[cancionSeleccionada]);
     eliminaItem(pantallaContenido);
     pantallaContenido.appendChild(contenido);
 
     seleccion = document.getElementById('contenido').children[0];
+    seleccion.play();
+    
+    seleccion.ontimeupdate = function () {
+
+            document.getElementById('tiempoTranscurrido').innerHTML = Math.floor(seleccion.currentTime / 60) + ':' + Math.floor(seleccion.currentTime % 60) + ' / ' + Math.floor(seleccion.duration / 60) + ':' + Math.floor(seleccion.duration % 60);
+            document.getElementById('barraTiempo').max = seleccion.duration;
+            document.getElementById('barraTiempo').value = seleccion.currentTime;
+
+            if (seleccion.ended) {
+                //barraDuracion.setAttribute('value', seleccion.currentTime);
+                reproducirSiguiente();
+            }
+
+        }
 }
+
 
 /**
  * Elimina el item que recibe por parámetro.
@@ -176,6 +188,7 @@ function eliminaItem(item) {
     }
 
 }
+
 
 /**
  * Limpia la seleccion de la lista de reproduccion.
@@ -185,25 +198,11 @@ function seleccionArchivo() {
     var listado = document.getElementsByClassName('archivo');
 
     for (let i = 0; i < listado.length; i++) {
-        if (listado[i].id == pistaSeleccionada) {
-            listado[i].style.backgroundColor = 'gray';
-            listado[i].style.color = 'white';
+        if (listado[i].getAttribute('seleccionada') == 'false') {
+            listado[i] = estiloDeseleccion;
         } else {
-            listado[i].style = estiloDeseleccion;
-        }
-    }
-
-}
-
-/**
- * Elimina el item que recibe por parámetro.
- */
-
-function eliminaItem(item) {
-
-    if (item.hasChildNodes()) {
-        while (item.childNodes.length >= 1) {
-            item.removeChild(item.firstChild);
+            listado[i].style.backgroundColor = 'grey';
+            listado[i].style.color = 'white';
         }
     }
 
