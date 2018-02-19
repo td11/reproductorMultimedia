@@ -1,0 +1,144 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: white;
+    color: black;
+}
+
+/*#contenedorPrincipal,
+#header,
+#cuerpo,
+#contenido,
+#controles,
+#listaReproduccion,
+#footer {
+    outline: 2px solid white; 
+}*/
+
+#contenedorPrincipal,
+#header,
+#listaReproduccion,
+#footer {
+    outline: 2px solid black;
+}
+
+
+#contenedorPrincipal {
+    margin: 3vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#header,
+#footer {
+    padding: 10px;
+}
+
+#header {
+    margin-bottom: 1%;
+}
+
+#footer {
+    margin-top: 1%;
+}
+
+#contenido,
+#controles,
+#listaReproduccion {
+    padding: 10px;
+}
+
+#cuerpo {
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+#contenedorReproductor {
+    flex-grow: 3;
+}
+
+#listaReproduccion {
+    flex-grow: 1;
+}
+
+.archivo {
+    border-radius: 10px;
+    text-align: right;
+    padding: 15px;
+}
+
+.archivo:hover {
+    color: black;
+    background-color: orange;
+}
+
+/* Menu acordeon */
+
+.accordion{
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .accordion:hover {
+    background-color: #ccc;
+}
+
+/* Style the accordion panel. Note: hidden by default */
+.panel {
+    padding: 0 18px;
+    background-color: white;
+    display: none;
+    overflow: hidden;
+}
+
+/* Fin menu acordeon */
+
+video,
+audio {
+    align-self: center;
+    width: auto;
+    height: 500px;
+}
+
+#controles {
+    align-self: flex-end;
+    margin-top: 1%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.control {}
+
+.control:hover {
+    background-color: grey;
+}
+
+#temporizador {
+    display: flex;
+}
+
+#barraTiempo {
+    flex-grow: 3;
+}
+
+#tiempoTranscurrido {
+    text-align: right;
+    align-self: center;
+    flex-grow: 1;
+}

@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <link href="CSS/estilo.css" rel="stylesheet" type="text/css" />
+    <title>Reproductor multimedia</title>
+</head>
+
+<body>
+
+    <div id="contenedorPrincipal">
+        <div id="header">
+            <object data="Media/Images/logoSVG.svg" type="image/svg+xml">
+                <img src="Media/Images/logoSVG.png" />
+        </object> 
+        </div>
+        <div id="cuerpo">
+            <div id="contenedorReproductor">
+                <div id="contenido"></div>
+                <div id="controles">
+                    <div id="temporizador">
+                        <input type="range" id="barraTiempo" name="barraTiempo" value="0" min="0" max="1" step=".01" />
+                        <span id="tiempoTranscurrido">0 / 0</span>
+                    </div>
+                    <div>
+                        <button class="control" id="btnPlay">
+                            <object data="Media/Images/play.svg" type="image/svg+xml">
+                               <img src="Media/Images/icons8-play-26.png" />
+                            </object>
+                        </button>
+                        <button class="control" id="btnAdelantar">
+                            <object data="Media/Images/adelantar.svg" type="image/svg+xml">
+                               <img src="Media/Images/adelantaricono.png" />
+                            </object>
+                        </button>
+                        <button class="control" id="btnSubirVolumen">
+                            <object data="Media/Images/volumenup.svg" type="image/svg+xml">
+                               <img src="Media/Images/up_volumen.png" />
+                            </object>
+                        </button>
+                        <button class="control" id="btnBajarVolumen">
+                            <object data="Media/Images/volumendown.svg" type="image/svg+xml">
+                               <img src="Media/Images/low-volume.png" />
+                            </object>
+                        </button>
+                        <input type="range" id="volumen" name="volumen" min="0" max="1" step=".1" value="1" />
+                    </div>
+                </div>
+            </div>
+            <div id="listaReproduccion">
+                <button class="accordion">Lista multimedia</button>
+                <div class="panel">
+                    <div id="1" class="archivo" tipo="audio">Papa Roach Born For Greatness</div>
+                    <div id="2" class="archivo" tipo="video">Batman Opening</div>
+                    <div id="3" class="archivo" tipo="audio">Papa Roach Falling Apart</div>
+                    <div id="4" class="archivo" tipo="video">Metal Gear Solid 2</div>
+                    <div id="5" class="archivo" tipo="audio">Papa Roach Last Resort</div>
+                    <div id="6" class="archivo" tipo="video">Deadpool 2 trailer</div>
+                </div>
+            </div>
+        </div>
+        <div id="footer">footer
+            <!--Agregar lo del copyright-->
+        </div>
+    </div>
+
+    <script src="JS/script.js" type="text/javascript"></script>
+</body>
+
+</html>
