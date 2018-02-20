@@ -2,7 +2,7 @@
 var seleccion, pistaSeleccionada = 0,
     estiloDeseleccion = document.getElementsByClassName('archivo')[1].style;
 
-var listadoArchivos = ['Media/Audio/Papa Roach - Born For Greatness.mp3', 'Media/Videos/BatmanOpening.mp4', 'Media/Audio/Papa Roach-Falling Apart.mp3', 'Media/Videos/mgs2.mp4', 'Media/Audio/Papa Roach - Last Resort.mp3', 'Media/Videos/trailer_deadpool.mp4'];
+var listadoArchivos = ['Media/Audio/Papa Roach - Born For Greatness.mp3', 'Media/Videos/BatmanOpening.webm', 'Media/Audio/Papa Roach-Falling Apart.mp3', 'Media/Videos/mgs2.ogv', 'Media/Audio/Papa Roach - Last Resort.mp3', 'Media/Videos/VideoSubtitulado.mp4'];
 var listaReproduccion = document.getElementsByClassName('archivo');
 var pantallaContenido = document.getElementById('contenido');
 var cancionSeleccionada;
@@ -17,34 +17,9 @@ cargaScript();
  */
 function cargaScript() {
 
-    inicializarSVG();
     cargaEventos();
 
 
-}
-
-
-function inicializarSVG() {
-    contenedorSvg = document.createElement('object');
-    svgPlay = document.createElement('img');
-    svgPlay.setAttribute('src', 'Media/Images/icons8-play-26.png');
-    svgPause = document.createElement('img');
-    svgPause.setAttribute('src', 'Media/Images/iconopause.png');
-}
-
-/* Alterna la visibilidad del boton svg Play y Pause */
-function svgPlayPause() {
-    var objetoMedia = document.getElementById('objetoPlay');
-    if (comprobarReproduccion == true) {
-        objetoMedia.setAttribute('data', 'Media/Images/play.svg');
-        objetoMedia.removeChild(objetoMedia.childNodes[0]);
-        objetoMedia.appendChild(svgPlay);
-    } else {
-        objetoMedia.setAttribute('data', 'Media/Images/pause.svg');
-        objetoMedia.removeChild(objetoMedia.childNodes[0]);
-        objetoMedia.appendChild(svgPause);
-
-    }
 }
 
 /**
@@ -72,6 +47,17 @@ function cargaEventos() {
             contenido.setAttribute('src', listadoArchivos[i]);
             cancionSeleccionada = i;
             eliminaItem(pantallaContenido);
+
+            if (i == 5) {
+                var subtitulos = document.createElement('track');
+                subtitulos.setAttribute('src','Media/Videos/subtitulos.vtt');
+                subtitulos.setAttribute('label','Subtitulo Español');
+                subtitulos.setAttribute('kind','subtitles');
+                subtitulos.setAttribute('srclang','es');
+                subtitulos.setAttribute('default',''); 
+                contenido.appendChild(subtitulos);
+            }
+
             pantallaContenido.appendChild(contenido);
 
             seleccion = document.getElementById('contenido').children[0];
@@ -130,10 +116,10 @@ function cargaEventos() {
 
 }
 
-function comprobarNumeroDeCanciones(){
-    if(cancionSeleccionada>5){
-        cancionSeleccionada=0;
-    }else{
+function comprobarNumeroDeCanciones() {
+    if (cancionSeleccionada > 5) {
+        cancionSeleccionada = 0;
+    } else {
         cancionSeleccionada++;
     }
 }
@@ -159,19 +145,18 @@ function reproducirSiguiente() {
 
     seleccion = document.getElementById('contenido').children[0];
     seleccion.play();
-    
+
     seleccion.ontimeupdate = function () {
 
-            document.getElementById('tiempoTranscurrido').innerHTML = Math.floor(seleccion.currentTime / 60) + ':' + Math.floor(seleccion.currentTime % 60) + ' / ' + Math.floor(seleccion.duration / 60) + ':' + Math.floor(seleccion.duration % 60);
-            document.getElementById('barraTiempo').max = seleccion.duration;
-            document.getElementById('barraTiempo').value = seleccion.currentTime;
+        document.getElementById('tiempoTranscurrido').innerHTML = Math.floor(seleccion.currentTime / 60) + ':' + Math.floor(seleccion.currentTime % 60) + ' / ' + Math.floor(seleccion.duration / 60) + ':' + Math.floor(seleccion.duration % 60);
+        document.getElementById('barraTiempo').max = seleccion.duration;
+        document.getElementById('barraTiempo').value = seleccion.currentTime;
 
-            if (seleccion.ended) {
-                //barraDuracion.setAttribute('value', seleccion.currentTime);
-                reproducirSiguiente();
-            }
-
+        if (seleccion.ended) {
+            reproducirSiguiente();
         }
+
+    }
 }
 
 
