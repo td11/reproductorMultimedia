@@ -9,23 +9,11 @@ body {
     color: black;
 }
 
-/*#contenedorPrincipal,
-#header,
-#cuerpo,
-#contenido,
-#controles,
-#listaReproduccion,
-#footer {
-    outline: 2px solid white; 
-}*/
-
 #contenedorPrincipal,
 #header,
-#listaReproduccion,
 #footer {
-    outline: 2px solid black;
+    outline: 4px solid black;
 }
-
 
 #contenedorPrincipal {
     margin: 3vh;
@@ -78,8 +66,10 @@ body {
 }
 
 .archivo:hover {
+    transition: 0.2s all ease;
     color: black;
-    background-color:#eee; 
+    background-color:grey;
+    padding-left: 2px;
 }
 
 /* Menu acordeon */
@@ -99,6 +89,12 @@ body {
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
 .active, .accordion:hover {
     background-color: #ccc;
+}
+
+button:hover {
+    transition: all .2s;
+    background-color: #4CAF50;
+    transform: scale(2);
 }
 
 /* Style the accordion panel. Note: hidden by default */
@@ -123,12 +119,6 @@ audio {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-}
-
-.control {}
-
-.control:hover {
-    background-color: grey;
 }
 
 #temporizador {
@@ -228,23 +218,6 @@ audio {
 
 /* Volumen */
 
-.triangle-range-background-slider {
-  position: relative;
-  display: block;
-  margin-top: -27px;
-  height: 20px;
-  background: url('https://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg'); 
-  background-size: 100% auto;
-  z-index: 1;
-}
-
-/* Input to work with triangle */
-input[type=range]>#volumen {
-  position: relative;
-  z-index: 3;
-}
-
-/*
 #volumen {
   -webkit-appearance: none;
   margin: 8.4px 0;
@@ -321,5 +294,5 @@ input[type=range]>#volumen {
 }
 #volumen:focus::-ms-fill-upper {
   background: #121212;
-} */
+} 
 

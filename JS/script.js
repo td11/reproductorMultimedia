@@ -80,7 +80,6 @@ function cargaEventos() {
             document.getElementById('barraTiempo').value = seleccion.currentTime;
 
             if (seleccion.ended) {
-                //barraDuracion.setAttribute('value', seleccion.currentTime);
                 reproducirSiguiente();
             }
 
@@ -184,10 +183,10 @@ function seleccionArchivo() {
 
     for (let i = 0; i < listado.length; i++) {
         if (listado[i].getAttribute('seleccionada') == 'false') {
-            listado[i] = estiloDeseleccion;
+            //listado[i] = estiloDeseleccion;
         } else {
-            listado[i].style.backgroundColor = 'grey';
-            listado[i].style.color = 'white';
+            //listado[i].style.backgroundColor = 'grey';
+            //listado[i].style.color = 'white';
         }
     }
 
