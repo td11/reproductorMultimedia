@@ -228,6 +228,23 @@ audio {
 
 /* Volumen */
 
+.triangle-range-background-slider {
+  position: relative;
+  display: block;
+  margin-top: -27px;
+  height: 20px;
+  background: url('https://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg'); 
+  background-size: 100% auto;
+  z-index: 1;
+}
+
+/* Input to work with triangle */
+input[type=range]>#volumen {
+  position: relative;
+  z-index: 3;
+}
+
+/*
 #volumen {
   -webkit-appearance: none;
   margin: 8.4px 0;
@@ -304,5 +321,5 @@ audio {
 }
 #volumen:focus::-ms-fill-upper {
   background: #121212;
-}
+} */
 
