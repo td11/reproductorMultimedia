@@ -6,7 +6,6 @@ var listadoArchivos = ['Media/Audio/Papa Roach - Born For Greatness.mp3', 'Media
 var listaReproduccion = document.getElementsByClassName('archivo');
 var pantallaContenido = document.getElementById('contenido');
 var cancionSeleccionada;
-var contenedorSvg, svgPlay, svgPause, dataSVGPlay, dataSVGPause;
 var comprobarReproduccion = true;
 //--------------------------------------
 
@@ -31,6 +30,10 @@ function cargaEventos() {
         listaReproduccion[i].addEventListener('click', function () {
 
             var contenido;
+            var caratula;
+            limpiarListaEstilo();
+            listaReproduccion[i].style.backgroundColor = 'grey';
+            listaReproduccion[i].style.color = 'white';
 
             switch (this.getAttribute('tipo')) {
                 case 'video':
@@ -41,26 +44,32 @@ function cargaEventos() {
                     break;
             }
 
-
-            seleccionArchivo();
-
+            caratula = document.createElement('img');
+            caratula.setAttribute('src', 'Media/Images/caratula.gif');
             contenido.setAttribute('src', listadoArchivos[i]);
             cancionSeleccionada = i;
             eliminaItem(pantallaContenido);
 
+            if (this.getAttribute('tipo') == 'audio')
+                pantallaContenido.appendChild(caratula);
+            
             if (i == 5) {
                 var subtitulos = document.createElement('track');
-                subtitulos.setAttribute('src','Media/Videos/subtitulos.vtt');
-                subtitulos.setAttribute('label','Subtitulo Español');
-                subtitulos.setAttribute('kind','subtitles');
-                subtitulos.setAttribute('srclang','es');
-                subtitulos.setAttribute('default',''); 
+                subtitulos.setAttribute('src', 'Media/Videos/subtitulos.vtt');
+                subtitulos.setAttribute('label', 'Subtitulo Español');
+                subtitulos.setAttribute('kind', 'subtitles');
+                subtitulos.setAttribute('srclang', 'es');
+                subtitulos.setAttribute('default', '');
                 contenido.appendChild(subtitulos);
             }
 
             pantallaContenido.appendChild(contenido);
 
-            seleccion = document.getElementById('contenido').children[0];
+            if (this.getAttribute('tipo') == 'audio')
+                seleccion = document.getElementById('contenido').children[1];
+            else
+                seleccion = document.getElementById('contenido').children[0];
+
 
         });
     }
@@ -124,10 +133,17 @@ function comprobarNumeroDeCanciones() {
 }
 
 function reproducirSiguiente() {
+    limpiarListaEstilo();
     comprobarNumeroDeCanciones();
     var contenido = document.getElementById('contenido');
     var siguienteCancion = document.getElementById('panel').children[cancionSeleccionada];
+    var caratula = document.createElement('img');
+    
+    listaReproduccion[cancionSeleccionada].style.backgroundColor = 'grey';
+    listaReproduccion[cancionSeleccionada].style.color = 'white';
 
+    caratula.setAttribute('src', 'Media/Images/caratula.gif');
+    
     switch (siguienteCancion.getAttribute('tipo')) {
         case 'video':
             contenido = document.createElement('video');
@@ -137,12 +153,21 @@ function reproducirSiguiente() {
             break;
     }
 
-    seleccionArchivo();
     contenido.setAttribute('src', listadoArchivos[cancionSeleccionada]);
     eliminaItem(pantallaContenido);
+    
+    if (siguienteCancion.getAttribute('tipo') == 'audio') 
+        pantallaContenido.appendChild(caratula);
+    
+    
     pantallaContenido.appendChild(contenido);
 
-    seleccion = document.getElementById('contenido').children[0];
+    
+    if (siguienteCancion.getAttribute('tipo') == 'audio')    
+        seleccion = document.getElementById('contenido').children[1];
+    else 
+        seleccion = document.getElementById('contenido').children[0];
+    
     seleccion.play();
 
     seleccion.ontimeupdate = function () {
@@ -183,11 +208,22 @@ function seleccionArchivo() {
 
     for (let i = 0; i < listado.length; i++) {
         if (listado[i].getAttribute('seleccionada') == 'false') {
-            //listado[i] = estiloDeseleccion;
+            //listado[i].style.backgroundColor = 'white';
+            //listado[i].style.color = 'black';
         } else {
-            //listado[i].style.backgroundColor = 'grey';
+            // listado[i].style.backgroundColor = 'grey';
             //listado[i].style.color = 'white';
         }
     }
 
+}
+
+/* Limpiar estilos de la lista de multimedia */
+function limpiarListaEstilo() {
+    var listado = document.getElementsByClassName('archivo');
+
+    for (let i = 0; i < listado.length; i++) {
+        listado[i].style.backgroundColor = 'grey';
+        listado[i].style.color = 'black';
+    }
 }
